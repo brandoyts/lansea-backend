@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+     public function user() {
+        $user = auth()->user();
+        return $user ? $user->email : null;
+    }
+
     public function register(Request $request) {
         $attr = $request->validate([
             'name' => 'required|string|max:255',
@@ -58,8 +63,10 @@ class AuthController extends Controller
     {
         auth()->user()->tokens()->delete();
 
-        return [
-            'message' => 'Logged out'
-        ];
+        return response()->json([
+                'status' => 200,
+                'success' => true,
+                'message' => 'Logged out successfully',
+            ], 200);
     }
 }
