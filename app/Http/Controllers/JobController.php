@@ -25,6 +25,24 @@ class JobController extends Controller
     }
 
     /**
+     * Display a listing of the resource based on current user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showUsersListing() {
+        $userId = auth()->user()->id;
+
+        $jobs = Job::where('user_id', $userId)->get()->toArray();
+
+        return response()->json([
+            'status' => 200,
+            'success' => true,
+            'message' => 'success',
+            'data' => $jobs
+        ], 200);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

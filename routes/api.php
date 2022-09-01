@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('jobs')->controller(JobController::class)->group(function () {
         Route::get('/', 'index');
+        Route::get('/show-users-listing', 'showUsersListing');
         Route::post('/create', 'store');
         Route::put('/update', 'update');
         Route::delete('/delete/{job}', 'destroy');
